@@ -232,6 +232,11 @@ public:
         return head;
     }
 
+    const std::vector<Node*>& getVector()
+    {
+        return dataVector;
+    }
+
 private:
     std::vector<Node *> dataVector;
     std::shared_ptr<Node> head = std::make_shared<Node>();
@@ -280,14 +285,30 @@ int main()
 
     //////////////////////////////////////////////////////////
     StoragePool storagePool(100);
-    storagePool.insert(std::make_shared<Data>(777, 0));
+    storagePool.insert(std::make_shared<Data>(777, 3));
     storagePool.insert(std::make_shared<Data>(100, 1));
     storagePool.insert(std::make_shared<Data>(140, 2));
-    storagePool.insert(std::make_shared<Data>(680, 3));
+    storagePool.insert(std::make_shared<Data>(680, 0));
 
-    std::cout << "Wrapped list." << std::endl;
+    std::cout << "Wrapped list:" << std::endl;
     auto anotherHead = storagePool.getHead();
     printList(anotherHead);
+
+    std::cout << std::endl;
+    std::cout << "Wrapped vector:" << std::endl;
+
+    auto innecVector = storagePool.getVector();
+    for (auto pointer: innecVector)
+    {
+        // 680, 100, 140, 777
+        if (pointer == nullptr)
+        {
+            break;
+        }
+
+        std::cout << pointer->data->number << " ";
+    }
+    std::cout << std::endl;
 
     return 0;
 }
