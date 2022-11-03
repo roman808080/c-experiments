@@ -201,14 +201,13 @@ public:
 
     Node *insert(std::shared_ptr<Data> dataObject)
     {
-        std::shared_ptr<Node> node = std::make_shared<Node>();
-        node->data = dataObject;
+        head = push(head, dataObject);
 
         const unsigned int idObject = dataObject->id;
-        dataVector[idObject] = node.get();
+        dataVector[idObject] = head.get();
 
         ++count;
-        return node.get();
+        return head.get();
     }
 
     Node *search(unsigned int idObject)
@@ -226,6 +225,11 @@ public:
     size_t size()
     {
         return count;
+    }
+
+    std::shared_ptr<Node> getHead()
+    {
+        return head;
     }
 
 private:
@@ -273,6 +277,17 @@ int main()
     removeNode(number_eight.get());
     std::cout << "Double linked list after removal by pointer: " << std::endl;
     printList(head);
+
+    //////////////////////////////////////////////////////////
+    StoragePool storagePool(100);
+    storagePool.insert(std::make_shared<Data>(777, 0));
+    storagePool.insert(std::make_shared<Data>(100, 1));
+    storagePool.insert(std::make_shared<Data>(140, 2));
+    storagePool.insert(std::make_shared<Data>(680, 3));
+
+    std::cout << "Wrapped list." << std::endl;
+    auto anotherHead = storagePool.getHead();
+    printList(anotherHead);
 
     return 0;
 }
