@@ -217,6 +217,11 @@ public:
 
     void remove(unsigned int idObject)
     {
+        if (dataVector[idObject] == head.get())
+        {
+            head = head->next;
+        }
+
         removeNode(dataVector[idObject]);
         dataVector[idObject] = nullptr;
         --count;
@@ -331,6 +336,18 @@ int main()
 
     std::cout << std::endl;
     std::cout << "List after removal:" << std::endl;
+    anotherHead = storagePool.getHead();
+    printList(anotherHead);
+
+    std::cout << std::endl;
+    std::cout << "After remove near tail" << std::endl;
+    storagePool.remove(3);
+    anotherHead = storagePool.getHead();
+    printList(anotherHead);
+
+    std::cout << std::endl;
+    std::cout << "After remove near head" << std::endl;
+    storagePool.remove(0);
     anotherHead = storagePool.getHead();
     printList(anotherHead);
 
