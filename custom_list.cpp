@@ -6,9 +6,10 @@
 struct Data
 {
     Data(int number, unsigned int id)
-    : number (number),
-      id (id)
-    {}
+        : number(number),
+          id(id)
+    {
+    }
 
     int number;
     unsigned int id;
@@ -18,10 +19,10 @@ struct Data
 class Node
 {
 public:
-    std::shared_ptr<Data> data {nullptr};
+    std::shared_ptr<Data> data{nullptr};
 
-    std::shared_ptr<Node> next {nullptr};
-    std::shared_ptr<Node> prev {nullptr};
+    std::shared_ptr<Node> next{nullptr};
+    std::shared_ptr<Node> prev{nullptr};
 };
 
 /* Given a reference (pointer to pointer)
@@ -109,7 +110,7 @@ void removeNode(std::shared_ptr<Node> node_to_remove)
     }
 }
 
-void removeNode(Node* node_to_remove)
+void removeNode(Node *node_to_remove)
 {
     /*1. check if the given prev_node is NULL */
     if (node_to_remove == nullptr)
@@ -198,7 +199,7 @@ public:
         count = 0;
     }
 
-    Node* insert(std::shared_ptr<Data> dataObject)
+    Node *insert(std::shared_ptr<Data> dataObject)
     {
         std::shared_ptr<Node> node = std::make_shared<Node>();
         node->data = dataObject;
@@ -228,7 +229,7 @@ public:
     }
 
 private:
-    std::vector<Node*> dataVector;
+    std::vector<Node *> dataVector;
     std::shared_ptr<Node> head = std::make_shared<Node>();
 
     size_t count;
