@@ -170,7 +170,7 @@ std::shared_ptr<Node> append(std::shared_ptr<Node> head_ref, std::shared_ptr<Dat
 void printList(std::shared_ptr<Node> node)
 {
     std::shared_ptr<Node> last;
-    std::cout << "\nTraversal in forward direction \n";
+    std::cout << "Traversal in forward direction" << std::endl;
 
     while (node.get() != nullptr && node->data.get() != nullptr)
     {
@@ -178,13 +178,15 @@ void printList(std::shared_ptr<Node> node)
         last = node;
         node = node->next;
     }
+    std::cout << std::endl;
 
-    std::cout << "\nTraversal in reverse direction \n";
+    std::cout << "Traversal in reverse direction" << std::endl;
     while (last.get() != nullptr && last->data.get() != nullptr)
     {
         std::cout << " " << last->data->number << " ";
         last = last->prev;
     }
+    std::cout << std::endl;
 }
 
 class StoragePool
@@ -255,12 +257,20 @@ int main()
 
     // Insert 8, after 7. So linked
     // list becomes 1->7->8->6->4->NULL
-    auto number_eight = insertAfter(head->next, std::make_shared<Data>(8, 1));
+    auto number_eight = insertAfter(head->next, std::make_shared<Data>(8, 5));
 
-    std::cout << "Created DLL is: ";
+    std::cout << "Created double linked list is: " << std::endl;
     printList(head);
 
+    std::cout << std::endl;
     removeNode(number_eight);
+    std::cout << "Created double linked list after removal: " << std::endl;
+    printList(head);
+
+    std::cout << std::endl;
+    number_eight = insertAfter(head->next, std::make_shared<Data>(8, 5));
+    removeNode(number_eight.get());
+    std::cout << "Double linked list after removal by pointer: " << std::endl;
     printList(head);
 
     return 0;
