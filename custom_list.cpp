@@ -295,7 +295,7 @@ int main()
     printList(anotherHead);
 
     std::cout << std::endl;
-    std::cout << "Wrapped vector:" << std::endl;
+    std::cout << "Vector before removal:" << std::endl;
 
     auto innecVector = storagePool.getVector();
     for (auto pointer: innecVector)
@@ -303,12 +303,36 @@ int main()
         // 680, 100, 140, 777
         if (pointer == nullptr)
         {
-            break;
+            continue;
         }
 
-        std::cout << pointer->data->number << " ";
+        std::cout << "id = " << pointer->data->id << " number = " << pointer->data->number << ", ";
     }
     std::cout << std::endl;
+
+    // Remove id 2.
+    storagePool.remove(2);
+
+    std::cout << std::endl;
+    std::cout << "Vector after removal:" << std::endl;
+
+    innecVector = storagePool.getVector();
+    for (auto pointer: innecVector)
+    {
+        // 680, 100, 777
+        if (pointer == nullptr)
+        {
+            continue;
+        }
+
+        std::cout << "id = " << pointer->data->id << " number = " << pointer->data->number << ", ";
+    }
+    std::cout << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "List after removal:" << std::endl;
+    anotherHead = storagePool.getHead();
+    printList(anotherHead);
 
     return 0;
 }
